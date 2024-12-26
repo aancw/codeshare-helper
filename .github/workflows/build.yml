@@ -18,18 +18,21 @@ jobs:
       - name: Package Extension
         run: |
           cd src  # Change to the src directory
-          zip -r ../extension.zip .  # Create a zip file of your extension in the parent directory
+          zip -r ../codeshare-ext.zip .  # Create a zip file of your extension in the parent directory
 
       - name: Upload Extension
         uses: actions/upload-artifact@v4
         with:
-          name: extension
-          path: extension.zip
+          name: codeshare-ext
+          path: codeshare-ext.zip
+
       - name: Upload Release Asset
-        if: github.event_name == 'release'  # Only run this step for release events
-        uses: actions/upload-release-asset@v1
+        if: github.event_name == 'release' 
+        uses: softprops/action-gh-release@v1  
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: codeshare-ext.zip
           asset_name: codeshare-ext.zip
           asset_content_type: application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
