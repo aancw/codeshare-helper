@@ -1,0 +1,27 @@
+name: Build and Package Extension
+
+on:
+  push:
+    branches:
+      - main 
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Package Extension
+        run: |
+          cd src  # Change to the src directory
+          zip -r ../extension.zip .  # Create a zip file of your extension in the parent directory
+
+      - name: Upload Extension
+        uses: actions/upload-artifact@v2
+        with:
+          name: extension
+          path: extension.zip
