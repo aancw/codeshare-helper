@@ -25,3 +25,11 @@ jobs:
         with:
           name: extension
           path: extension.zip
+      - name: Upload Release Asset
+        if: github.event_name == 'release'  # Only run this step for release events
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: codeshare-ext.zip
+          asset_name: codeshare-ext.zip
+          asset_content_type: application/zip
