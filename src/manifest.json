@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Frida CodeShare Helper",
+    "version": "1.0",
+    "author": "Petruknisme",
+    "description": "A browser extension that enhances Frida CodeShare by enabling easy copying and downloading of code snippets as you browse.",
+    "permissions": [
+        "activeTab", 
+        "storage", 
+        "clipboardWrite"
+    ], 
+    "action": {
+      "default_popup": "popup/popup.html"
+    },
+    "content_scripts": [
+      {
+          "matches": ["https://codeshare.frida.re/*"], 
+          "js": ["contentScript/content.js"],
+          "run_at": "document_end" 
+      }
+    ]
+  }
